@@ -112,7 +112,7 @@ function Invoke-MSOLSpray{
                 # Standard invalid password
             If($RespErr -match "AADSTS50126")
                 {
-                continue
+                Write-Output "InvalidUserNameOrPassword."
                 }
 
                 # Invalid Tenant Response
@@ -144,7 +144,7 @@ function Invoke-MSOLSpray{
                 # Locked out account or Smart Lockout in place
             ElseIf($RespErr -match "AADSTS50053")
                 {
-                Write-Output "[*] WARNING! The account $username appears to be locked."
+                Write-Output "[*] WARNING! The account $username appears to be locked. Or, sign-in was blocked because it came from an IP address with malicious activity"
                 $lockout_count++
                 }
 
